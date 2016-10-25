@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0 auto;
+				padding: 0px;
+				text-align: center;
+			}
+			h1{
+				font-size: 50px;
+				font-family: "微软雅黑";
+			}
+			h1{
+				color: red;
+				line-height: 100px;
+			}
+			div{
+				width: 200px;
+				height: 100px;
+				border: 1px solid black ;
+			}
+		</style>
+		<!--以下几行代码 可以实现先弹出信息接收框输入时间 然后倒计时-->
+		<script type="text/javascript">
+			var shuruzhi=prompt("请输入倒计时时间：");//把输入框的接受值给一个变量接收，因要先显示在所有网页之前 所以在最前面
+		</script>
+	</head>
+	<body>
+		<form action="#" method="post">
+		<div id="">
+			<!--<input type="text" id="tex" placeholder="请输入倒计时时间" />在div里面在加一个接收文本框 直接输入时间 按开始计时此方法会形成重复开始计时的错误。不知道怎么解-->
+			<h1 id="kongbiaoqian"></h1><!--设置一个空的标签，放在div里面比较好布局。	-->
+		</div>	
+		<input type="button" id="butt" value="开始倒计时"  onclick="startime()"/><!--设置一个按键 并且设置一个单击事件-->
+		<input type="button" id="bottonstop" value="暂停倒计时"  onclick="stopt()"/><!--设置一个按键 并且设置一个单击事件-->			
+		</form>
+	</body>
+	<script type="text/javascript">	
+	var inptex =document.getElementById("tex");/*用变量接收通过ID找到的元素  这个元素是一个input标签 文本属性 里面输入的值要用value来返回 所以后面接收这个值的时候用了tex.value 第46行*/
+	var emp = document.getBitmapById("kbq");/*用通过ID来获取此ID的元素并且用一个变量接收*/
+	function startime(){/*开始设置第一个单击事件的方法*/	
+			var timer=shuruzhi;/*将信息输入框获取的数值 用一个变量来接收*/
+		 	jishi=setInterval(function(){/*设置事件循环参数来控制倒计时的间隔，每1000毫秒循环一次*/	 	 	
+				if(timer==0){/*当接收到的时间循环到零的时候*/
+					kongbiaoqian.innerHTML=timer="时间到!";/*当接收到的时间循环到零的时候输出时间到 提示*/
+					clearInterval(jishi);		/*当接收到的时间循环到零的时候停止计时器 也就是自身的计时，否则会一直自减下去 所以给自己的这个计时器设一个变量  停止本变量*/		
+				}
+					kongbiaoqian.innerHTML=timer;/*第一次是将通过消息输入框接收到的数值 赋值给 空h1标签 就是替换空H1标签的文本*/
+					timer--;	/*然后自减一次 再循环 本函数 直到等于零*/
+		    },1000)	/*循环时间是1000毫秒一次*/
+	}		
+	function stopt(){/*为停止按钮的单击事件 设置一个函数*/
+		clearInterval(jishi);/*函数就是停止开始计时的 循环函数，因为上一个计时的循环和这个是在两个不同的函数里面 所以要将上一个 计时函数的接收变量设置为全局变量  就是不用VAR 声明。*/
+	}
+	</script>
+</html>
